@@ -9,6 +9,7 @@ import { AppCommonNotFound } from "../components/common";
 
 // Pages
 import HomeIndex from "@/modules/home/pages/HomeIndex.vue";
+import HomeDetail from "@/modules/home/pages/HomeDetail.vue";
 
 const routes = [
   {
@@ -20,10 +21,15 @@ const routes = [
         path: "",
         component: HomeIndex,
       },
+      {
+        name: "HomeDetail",
+        path: "detail",
+        component: HomeDetail,
+      },
     ],
   },
-  // 404
   {
+    // 404
     path: "/:catchAll(.*)",
     component: AppCommonNotFound,
   },

@@ -41,45 +41,70 @@
         </div>
       </form>
 
+      <!-- Filter and Sorting Controls -->
+      <div class="flex justify-between mb-6">
+        <!-- Filter Dropdown -->
+        <div>
+          <label for="filter" class="font-semibold">Filter by:</label>
+          <select id="filter" class="rounded border px-2 py-1 ml-2">
+            <option value="all">All</option>
+            <option value="important">Important</option>
+            <option value="work">Work</option>
+            <option value="personal">Personal</option>
+          </select>
+        </div>
+
+        <!-- Sorting Dropdown -->
+        <div>
+          <label for="sort" class="font-semibold">Sort by:</label>
+          <select id="sort" class="rounded border px-2 py-1 ml-2">
+            <option value="recent">Recent</option>
+            <option value="alphabetical">Alphabetical</option>
+          </select>
+        </div>
+      </div>
+
       <!-- List of existing notes -->
       <div>
         <h2 class="text-xl font-bold mb-4">Your Notes</h2>
-        <div class="bg-white shadow overflow-hidden sm:rounded-md">
-          <ul>
-            <li>
-              <a
-                href="#"
-                class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out"
-              >
-                <div class="px-4 py-4 sm:px-6">
-                  <div class="flex items-center justify-between">
-                    <p
-                      class="text-sm leading-5 font-medium text-indigo-600 truncate"
-                    >
-                      Note Title
-                    </p>
-                    <div class="ml-2 flex-shrink-0 flex">
-                      <span
-                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
-                      >
-                        New
-                      </span>
-                    </div>
-                  </div>
-                  <div class="mt-2 sm:flex sm:justify-between">
-                    <div class="sm:flex">
+        <div class="flex flex-col gap-4">
+          <div class="bg-white shadow overflow-hidden sm:rounded-md">
+            <ul>
+              <li>
+                <a
+                  href="#"
+                  class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out"
+                >
+                  <div class="px-4 py-4 sm:px-6">
+                    <div class="flex items-center justify-between">
                       <p
-                        class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mt-0"
+                        class="text-sm leading-5 font-medium text-indigo-600 truncate"
                       >
-                        Content of the note
+                        Note Title
                       </p>
+                      <div class="ml-2 flex-shrink-0 flex">
+                        <span
+                          class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                        >
+                          New
+                        </span>
+                      </div>
+                    </div>
+                    <div class="mt-2 sm:flex sm:justify-between">
+                      <div class="sm:flex">
+                        <p
+                          class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mt-0"
+                        >
+                          Content of the note
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            </li>
-            <!-- More notes can be added here -->
-          </ul>
+                </a>
+              </li>
+              <!-- More notes can be added here -->
+            </ul>
+          </div>
         </div>
       </div>
     </div>
