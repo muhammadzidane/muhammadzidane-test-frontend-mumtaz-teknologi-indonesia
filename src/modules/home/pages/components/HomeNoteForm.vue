@@ -5,8 +5,7 @@
   >
     <div class="mb-4">
       <AppBaseFormGroup name="Title" :validator="v$.title" name-as-label>
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        <AppBaseInput
           id="title"
           type="text"
           placeholder="Enter title"
@@ -42,6 +41,7 @@ import { computed, ref } from "vue";
 // Vuelidate
 import { required, minLength } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
+import AppBaseInput from "@/modules/app/components/base/AppBaseInput.vue";
 
 // Ref
 const formData = ref({
@@ -51,17 +51,18 @@ const formData = ref({
 
 // Computed
 const rules = computed(() => ({
-  title: { required, minLength: minLength(8) },
-  content: { required },
+  title: { required },
+  content: { required, minLength: minLength(6) },
 }));
 
 const v$ = useVuelidate(rules, formData, { $autoDirty: true });
 
 // Methods
 const submitForm = async () => {
-  const result = await v$.value.$validate();
-  if (!result) {
-    return true;
+  const validate = await v$.value.$validate();
+
+  if (validate) {
+    console.log(true);
   }
 };
 </script>

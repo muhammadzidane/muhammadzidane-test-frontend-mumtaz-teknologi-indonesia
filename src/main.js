@@ -20,6 +20,10 @@ import {
 // Router
 import router from "@/modules/app/router";
 
+// Store
+
+import store from "@/modules/app/store";
+
 // Library
 import pinia from "@/plugins/pinia";
 
@@ -31,6 +35,7 @@ import "../src/assets/css/index.css";
 createApp(App)
   .use(router)
   .use(pinia)
+  .use(store)
   .component("Icon", Icon)
   .component("AppMainLayout", AppMainLayout)
   .component("AppBaseTable", AppBaseTable)
