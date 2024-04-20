@@ -36,7 +36,6 @@
               </div>
             </a>
           </li>
-          <!-- More notes can be added here -->
         </ul>
       </div>
     </div>

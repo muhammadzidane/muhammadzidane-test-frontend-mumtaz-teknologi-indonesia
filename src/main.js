@@ -14,6 +14,7 @@ import {
   AppBaseInput,
   AppBaseBadge,
   AppBasePopover,
+  AppBaseFormGroup,
 } from "@/modules/app/components/base";
 
 // Router
@@ -38,4 +39,5 @@ createApp(App)
   .component("AppBaseDialog", AppBaseDialog)
   .component("AppBaseBadge", AppBaseBadge)
   .component("AppBasePopover", AppBasePopover)
+  .component("AppBaseFormGroup", AppBaseFormGroup)
   .mount("#app");

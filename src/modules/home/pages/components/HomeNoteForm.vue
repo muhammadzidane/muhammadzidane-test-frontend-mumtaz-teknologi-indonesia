@@ -1,30 +1,33 @@
 <template>
-  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+  <form
+    @submit.prevent="submitForm"
+    class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+  >
     <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-        Title
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        id="title"
-        type="text"
-        placeholder="Enter title"
-      />
+      <AppBaseFormGroup name="Title" :validator="v$.title" name-as-label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="title"
+          type="text"
+          placeholder="Enter title"
+          v-model="formData.title"
+        />
+      </AppBaseFormGroup>
     </div>
     <div class="mb-6">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="content">
-        Content
-      </label>
-      <textarea
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        id="content"
-        placeholder="Enter content"
-      ></textarea>
+      <AppBaseFormGroup name="Content" :validator="v$.content" name-as-label>
+        <textarea
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="content"
+          placeholder="Enter content"
+          v-model="formData.content"
+        ></textarea>
+      </AppBaseFormGroup>
     </div>
     <div class="flex items-center justify-between">
       <button
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        type="button"
+        type="submit"
       >
         Add Note
       </button>
@@ -32,4 +35,33 @@
   </form>
 </template>
 
-<script setup></script>
+<script setup>
+// Vue
+import { computed, ref } from "vue";
+
+// Vuelidate
+import { required, minLength } from "@vuelidate/validators";
+import useVuelidate from "@vuelidate/core";
+
+// Ref
+const formData = ref({
+  title: "",
+  content: "",
+});
+
+// Computed
+const rules = computed(() => ({
+  title: { required, minLength: minLength(8) },
+  content: { required },
+}));
+
+const v$ = useVuelidate(rules, formData, { $autoDirty: true });
+
+// Methods
+const submitForm = async () => {
+  const result = await v$.value.$validate();
+  if (!result) {
+    return true;
+  }
+};
+</script>
