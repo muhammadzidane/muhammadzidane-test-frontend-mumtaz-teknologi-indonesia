@@ -37,7 +37,7 @@ const props = defineProps({
 const computedClasses = computed(() => {
   return [
     "flex",
-    "justify-between",
+    "justify-center",
     "items-center",
     "rounded",
     "text-white",

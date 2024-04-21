@@ -5,56 +5,42 @@
     <h2 class="text-xl font-bold mb-4">Your Notes</h2>
 
     <div class="flex flex-col gap-4">
-      <div class="flex justify-center" v-if="home.homeLoadingNotes">
+      <div class="flex justify-center" v-if="homeStore.homeLoadingNotes">
         <Icon class="text-[28px]" icon="line-md:loading-loop" />
       </div>
       <HomeNoteCardList
-        v-for="note in home.homeNotes"
-        v-else
+        v-for="note in homeStore.homeNotes"
         :key="note.id"
         :id="note.id"
         :title="note.title"
         :content="note.content"
+        :fetchNotes="homeFetchNotes"
       />
-
-      <HomeNoteCardList id="123" title="wwww" content="wwww" />
     </div>
   </div>
 </template>
 
 <script setup>
 // Vue
-import { computed, reactive, watch } from "vue";
-
-// Vuex
-import { useStore } from "vuex";
+import { watch } from "vue";
 
 // Components
-import { HomeSorting, HomeNoteCardList } from "./";
+import { HomeNoteCardList } from "./";
 
-// Hooks
-const store = useStore();
+// Services
+import useHomeService from "@/modules/home/services/homeService.js";
 
-// Ref
-const filter = reactive({ sort: "recent" });
-
-// Computed
-const home = computed(() => store.state.home);
+const { homeFilterNotes, homeFetchNotes, homeStore } = useHomeService();
 
 // Methods
 const onChangeSorting = (value) => {
-  filter.sort = value;
-};
-
-// Lifecycle
-const fetchNotes = () => {
-  // store.dispatch("homeFetchNotes", filter);
+  homeFilterNotes.sort = value;
 };
 
 watch(
-  filter,
+  homeFilterNotes,
   () => {
-    fetchNotes();
+    homeFetchNotes();
   },
   { immediate: true, deep: true },
 );

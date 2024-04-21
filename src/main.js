@@ -11,12 +11,14 @@ import {
   AppBaseTable,
   AppBaseButton,
   AppBaseDialog,
+  AppBaseDialogAlert,
   AppBaseInput,
   AppBaseTextArea,
   AppBaseSelect,
   AppBaseBadge,
   AppBasePopover,
   AppBaseFormGroup,
+  AppBasePortal,
 } from "@/modules/app/components/base";
 
 // Router
@@ -46,7 +48,9 @@ createApp(App)
   .component("AppBaseTextArea", AppBaseTextArea)
   .component("AppBaseSelect", AppBaseSelect)
   .component("AppBaseDialog", AppBaseDialog)
+  .component("AppBaseDialogAlert", AppBaseDialogAlert)
   .component("AppBaseBadge", AppBaseBadge)
   .component("AppBasePopover", AppBasePopover)
   .component("AppBaseFormGroup", AppBaseFormGroup)
+  .component("AppBasePortal", AppBasePortal)
   .mount("#app");

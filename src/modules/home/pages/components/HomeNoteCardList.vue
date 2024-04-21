@@ -53,6 +53,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  fetchNotes: {
+    type: Function,
+    default: () => {},
+  },
 });
 
 // Hooks
@@ -65,6 +69,6 @@ const onRedirectToDetail = () => {
 };
 const onDeleteNote = async () => {
   await store.dispatch("homeDeleteNote", props.id);
-  alert("berhasil delete");
+  props.fetchNotes();
 };
 </script>

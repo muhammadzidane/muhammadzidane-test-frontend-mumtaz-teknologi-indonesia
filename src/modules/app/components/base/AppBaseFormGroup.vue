@@ -4,7 +4,7 @@
       {{ name }}
     </div>
     <slot :placeholder="name" />
-    <div class="mt-1 text-danger">{{ errors }}</div>
+    <div v-if="errorMessage" class="mt-1 text-danger">{{ errorMessage }}</div>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ const invalid = computed(
   () => props.validator.$dirty && props.validator.$invalid,
 );
 
-const errors = computed(() => {
+const errorMessage = computed(() => {
   if (!invalid.value) {
     return "";
   }
