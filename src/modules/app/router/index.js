@@ -10,6 +10,7 @@ import { AppCommonNotFound } from "../components/common";
 // Pages
 import HomeIndex from "@/modules/home/pages/HomeIndex.vue";
 import HomeDetail from "@/modules/home/pages/HomeDetail.vue";
+import HomeEdit from "@/modules/home/pages/HomeEdit.vue";
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
         name: "HomeDetail",
         path: "detail/:id",
         component: HomeDetail,
+      },
+      {
+        name: "HomeEdit",
+        path: "edit/:id",
+        component: HomeEdit,
       },
     ],
   },

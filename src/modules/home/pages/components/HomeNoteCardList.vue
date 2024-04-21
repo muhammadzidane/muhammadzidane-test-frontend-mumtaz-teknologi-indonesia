@@ -26,8 +26,13 @@
       </div>
     </div>
 
-    <div class="cursor-pointer" @click="onDeleteNote">
-      <Icon class="text-[24px]" icon="carbon:close-outline" />
+    <div class="flex gap-4">
+      <div class="cursor-pointer" @click="onEditNote">
+        <Icon class="text-[24px]" icon="tabler:edit" />
+      </div>
+      <div class="cursor-pointer" @click="onDeleteNote">
+        <Icon class="text-[24px]" icon="carbon:close-outline" />
+      </div>
     </div>
   </div>
 </template>
@@ -46,7 +51,7 @@ const props = defineProps({
 });
 
 // Emits
-const emits = defineEmits(["detail", "delete"]);
+const emits = defineEmits(["detail", "delete", "edit"]);
 
 const onRedirectToDetail = () => {
   emits("detail");
@@ -54,5 +59,9 @@ const onRedirectToDetail = () => {
 
 const onDeleteNote = () => {
   emits("delete");
+};
+
+const onEditNote = () => {
+  emits("edit");
 };
 </script>

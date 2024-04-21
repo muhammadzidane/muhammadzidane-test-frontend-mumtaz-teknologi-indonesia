@@ -10,6 +10,14 @@ const useHomeDialogService = () => {
     });
   };
 
+  const onOpenDialogSuccessEditNote = () => {
+    dialogShowDialog({
+      okBtnText: "Oke",
+      title: "Success!",
+      description: "New note has been successfully edited.",
+    });
+  };
+
   const onOpenDialogSuccessDeleteNote = () => {
     dialogShowDialog({
       okBtnText: "Oke",
@@ -26,11 +34,17 @@ const useHomeDialogService = () => {
     dialogCloseDialog();
   };
 
+  const onCloseDialogEditDeleteNote = () => {
+    dialogCloseDialog();
+  };
+
   return {
     dialog,
     onOpenDialogSuccessCreateNote,
+    onOpenDialogSuccessEditNote,
     onCloseDialogSuccessCreateNote,
     onOpenDialogSuccessDeleteNote,
+    onCloseDialogEditDeleteNote,
     onCloseDialogSuccessDeleteNote,
   };
 };

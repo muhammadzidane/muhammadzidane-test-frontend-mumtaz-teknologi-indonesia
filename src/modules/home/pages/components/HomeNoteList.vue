@@ -15,6 +15,7 @@
         :id="note.id"
         :title="note.title"
         :content="note.content"
+        @edit="onEdit(note.id)"
         @detail="onDetail(note.id)"
         @delete="onDelete(note.id)"
       />
@@ -35,7 +36,7 @@ import { watch } from "vue";
 import { useRouter } from "vue-router";
 
 // Components
-import { HomeNoteCardList } from "./";
+import { HomeNoteCardList, HomeSorting } from "./";
 
 // Services
 import useHomeService from "@/modules/home/services/homeService.js";
@@ -63,6 +64,9 @@ watch(
 // Methods
 const onChangeSorting = (value) => {
   homeFilterNotes.sort = value;
+};
+const onEdit = (id) => {
+  router.push({ name: "HomeEdit", params: { id } });
 };
 const onDetail = (id) => {
   router.push({ name: "HomeDetail", params: { id } });

@@ -8,39 +8,47 @@ const homeStore = {
 
     // Note Detail
     homeLoadingDetailNote: false,
-    homeLoadingDetail: {},
+    homeDetailNote: {},
 
     // Create
     homeLoadingCreateNote: false,
 
     // Delete
     homeLoadingDeleteNote: false,
+
+    // Edit
+    homeLoadingEditNote: false,
   }),
   mutations: {
     // Notes
-    homeSetLoadingNotes(state, homeNotes) {
-      state.homeLoadingNotes = homeNotes;
+    homeSetLoadingNotes(state, value) {
+      state.homeLoadingNotes = value;
     },
-    homeSetNotes(state, homeNotes) {
-      state.homeNotes = homeNotes;
+    homeSetNotes(state, value) {
+      state.homeNotes = value;
     },
 
     // Note Detail
-    homeSetLoadingDetailNote(state, homeNotes) {
-      state.homeLoadingDetailNote = homeNotes;
+    homeSetLoadingDetailNote(state, value) {
+      state.homeLoadingDetailNote = value;
     },
-    homeSetDetailNote(state, homeNotes) {
-      state.homeLoadingDetail = homeNotes;
+    homeSetDetailNote(state, value) {
+      state.homeDetailNote = value;
     },
 
     // Note Create
-    homeSetLoadingCreateNote(state, homeNotes) {
-      state.homeLoadingCreateNote = homeNotes;
+    homeSetLoadingCreateNote(state, value) {
+      state.homeLoadingCreateNote = value;
     },
 
     // Note Delete
-    homeSetLoadingDeleteNote(state, homeNotes) {
-      state.homeLoadingDeleteNote = homeNotes;
+    homeSetLoadingDeleteNote(state, value) {
+      state.homeLoadingDeleteNote = value;
+    },
+
+    // Note Edit
+    homeSetLoadingEditNote(state, value) {
+      state.homeLoadingEditNote = value;
     },
   },
   actions: {
@@ -63,13 +71,11 @@ const homeStore = {
       }
     },
 
-    async homeFetchDetailNote({ commit }, id, params = {}) {
+    async homeFetchDetailNote({ commit }, id) {
       try {
         commit("homeSetLoadingDetailNote", true);
 
-        const response = await http.get(`/notes/${id}`, {
-          params,
-        });
+        const response = await http.get(`/notes/${id}`);
         const data = response.data.data;
 
         commit("homeSetDetailNote", data);
@@ -109,6 +115,21 @@ const homeStore = {
         return Promise.resolve(error);
       } finally {
         commit("homeSetLoadingDeleteNote", false);
+      }
+    },
+
+    async homeEditNote({ commit }, params) {
+      try {
+        commit("homeSetLoadingEditNote", true);
+
+        const response = await http.put(`/notes/${params.id}`, params.body);
+        const data = response.data.data;
+
+        return Promise.resolve(data);
+      } catch (error) {
+        return Promise.resolve(error);
+      } finally {
+        commit("homeSetLoadingEditNote", false);
       }
     },
   },
