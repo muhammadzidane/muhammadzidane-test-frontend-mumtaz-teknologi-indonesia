@@ -23,6 +23,8 @@
   </div>
 
   <AppBaseDialogAlert
+    :type="homeDialog.type"
+    :message="homeDialog.description"
     :show="homeDialog.show"
     @close="homeOnCloseDialogSuccessDeleteNote"
   />
