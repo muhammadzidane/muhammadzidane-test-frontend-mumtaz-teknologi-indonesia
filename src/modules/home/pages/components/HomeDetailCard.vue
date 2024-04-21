@@ -6,7 +6,7 @@
   <div v-else class="bg-white shadow overflow-hidden sm:rounded-lg">
     <div class="px-4 py-5 sm:px-6">
       <h3 class="text-lg leading-6 font-medium text-gray-900">
-        {{ homeStore.homeLoadingDetail.title }}
+        {{ homeStore.homeDetailNote.title }}
       </h3>
     </div>
     <div class="border-t border-gray-200">
@@ -18,7 +18,7 @@
             Note Content
           </dt>
           <div class="mt-1 text-sm leading-5 text-gray-900 sm:col-span-2">
-            {{ homeStore.homeLoadingDetail.content }}
+            {{ homeStore.homeDetailNote.content }}
           </div>
         </div>
       </dl>
@@ -42,9 +42,7 @@ const { homeFetchDetailNote, homeStore } = useHomeService();
 
 // Lifecyle
 const fetchDetailNote = () => {
-  const id = route.params.id;
-
-  homeFetchDetailNote(id);
+  homeFetchDetailNote(route.params.id);
 };
 
 onMounted(() => {
