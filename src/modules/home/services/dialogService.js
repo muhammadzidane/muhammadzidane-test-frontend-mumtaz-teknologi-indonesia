@@ -10,14 +10,28 @@ const useHomeDialogService = () => {
     });
   };
 
+  const onOpenDialogSuccessDeleteNote = () => {
+    dialogShowDialog({
+      okBtnText: "Oke",
+      title: "Success!",
+      description: "New note has been successfully deleted.",
+    });
+  };
+
   const onCloseDialogSuccessCreateNote = () => {
     dialogCloseDialog();
   };
 
+  const onCloseDialogSuccessDeleteNote = () => {
+    dialogCloseDialog();
+  };
+
   return {
-    dialogSuccessCreate: dialog,
+    dialog,
     onOpenDialogSuccessCreateNote,
     onCloseDialogSuccessCreateNote,
+    onOpenDialogSuccessDeleteNote,
+    onCloseDialogSuccessDeleteNote,
   };
 };
 

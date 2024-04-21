@@ -33,18 +33,8 @@
 </template>
 
 <script setup>
-// Vue Router
-import { useRouter } from "vue-router";
-
-// Vuex
-import { useStore } from "vuex";
-
 // Props
 const props = defineProps({
-  id: {
-    type: String,
-    default: null,
-  },
   title: {
     type: String,
     default: null,
@@ -53,22 +43,16 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  fetchNotes: {
-    type: Function,
-    default: () => {},
-  },
 });
 
-// Hooks
-const router = useRouter();
-const store = useStore();
+// Emits
+const emits = defineEmits(["detail", "delete"]);
 
-// Methods
 const onRedirectToDetail = () => {
-  router.push({ name: "HomeDetail", params: { id: props.id } });
+  emits("detail");
 };
-const onDeleteNote = async () => {
-  await store.dispatch("homeDeleteNote", props.id);
-  props.fetchNotes();
+
+const onDeleteNote = () => {
+  emits("delete");
 };
 </script>

@@ -17,9 +17,11 @@ const useHomeService = () => {
 
   // Dialog
   const {
-    dialogSuccessCreate,
+    dialog,
     onOpenDialogSuccessCreateNote,
+    onOpenDialogSuccessDeleteNote,
     onCloseDialogSuccessCreateNote,
+    onCloseDialogSuccessDeleteNote,
   } = useHomeDialogService();
 
   // Ref
@@ -47,6 +49,15 @@ const useHomeService = () => {
     }
   };
 
+  const homeDeleteNote = async (id) => {
+    try {
+      await store.dispatch("homeDeleteNote", id);
+      onOpenDialogSuccessDeleteNote();
+    } catch (error) {
+      //
+    }
+  };
+
   const homeFetchNotes = async () => {
     try {
       await store.dispatch("homeFetchNotes", filterNotes);
@@ -64,23 +75,24 @@ const useHomeService = () => {
   };
 
   const homeSubmitCreateNote = async () => {
-    onOpenDialogSuccessCreateNote();
-    // const validate = await v$.value.$validate();
+    const validate = await v$.value.$validate();
 
-    // if (validate) {
-    // await homeCreateNote();
-    // formData.value = {
-    //   title: "",
-    //   content: "",
-    // };
-    // v$.value.$reset();
-    // }
+    if (validate) {
+      onOpenDialogSuccessCreateNote();
+      await homeCreateNote();
+      formData.value = {
+        title: "",
+        content: "",
+      };
+      v$.value.$reset();
+    }
   };
 
   return {
     homeStore,
     homeCreateNote,
     homeFetchNotes,
+    homeDeleteNote,
     homeFetchDetailNote,
     homeSubmitCreateNote,
     homeFormValidatorNote: v$,
@@ -88,8 +100,9 @@ const useHomeService = () => {
     homeFilterNotes: filterNotes,
 
     // Dialog
-    homeDialogSuccessCreate: dialogSuccessCreate,
+    homeDialog: dialog,
     homeOnCloseDialogSuccessCreateNote: onCloseDialogSuccessCreateNote,
+    homeOnCloseDialogSuccessDeleteNote: onCloseDialogSuccessDeleteNote,
   };
 };
 

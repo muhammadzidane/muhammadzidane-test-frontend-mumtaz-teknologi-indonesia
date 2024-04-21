@@ -38,7 +38,7 @@
   </form>
 
   <AppBaseDialogAlert
-    :show="homeDialogSuccessCreate.show"
+    :show="homeDialog.show"
     @close="homeOnCloseDialogSuccessCreateNote"
     type="success"
   />
@@ -54,7 +54,7 @@ const {
   homeFormData,
   homeFormValidatorNote,
   homeSubmitCreateNote,
-  homeDialogSuccessCreate,
+  homeDialog,
   homeOnCloseDialogSuccessCreateNote,
 } = useHomeService();
 
