@@ -15,12 +15,11 @@
     </div>
     <div class="mb-6">
       <AppBaseFormGroup name="Content" :validator="v$.content" name-as-label>
-        <textarea
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        <AppBaseTextArea
           id="content"
           placeholder="Enter content"
           v-model="formData.content"
-        ></textarea>
+        ></AppBaseTextArea>
       </AppBaseFormGroup>
     </div>
     <div class="flex items-center justify-between">

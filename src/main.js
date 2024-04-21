@@ -12,6 +12,8 @@ import {
   AppBaseButton,
   AppBaseDialog,
   AppBaseInput,
+  AppBaseTextArea,
+  AppBaseSelect,
   AppBaseBadge,
   AppBasePopover,
   AppBaseFormGroup,
@@ -41,6 +43,8 @@ createApp(App)
   .component("AppBaseTable", AppBaseTable)
   .component("AppBaseButton", AppBaseButton)
   .component("AppBaseInput", AppBaseInput)
+  .component("AppBaseTextArea", AppBaseTextArea)
+  .component("AppBaseSelect", AppBaseSelect)
   .component("AppBaseDialog", AppBaseDialog)
   .component("AppBaseBadge", AppBaseBadge)
   .component("AppBasePopover", AppBasePopover)

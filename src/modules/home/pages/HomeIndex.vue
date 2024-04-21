@@ -5,11 +5,8 @@
     <!-- Form to add a new note -->
     <HomeNoteForm />
 
-    <!-- Filter and Sorting Controls -->
-    <HomeSorting />
-
     <!-- List of existing notes -->
-    <!-- <HomeNoteList /> -->
+    <HomeNoteList />
   </div>
 </template>
 

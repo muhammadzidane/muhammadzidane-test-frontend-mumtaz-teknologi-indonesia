@@ -3,12 +3,20 @@
     <!-- Sorting Dropdown -->
     <div>
       <label for="sort" class="font-semibold">Sort by:</label>
-      <select id="sort" class="rounded border px-2 py-1 ml-2">
+      <AppBaseSelect model-value="recent" @update:model-value="changeSelect">
         <option value="recent">Recent</option>
         <option value="alphabetical">Alphabetical</option>
-      </select>
+      </AppBaseSelect>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+// Emits
+const emits = defineEmits(["change"]);
+
+// Methods
+const changeSelect = (value) => {
+  emits("change", value);
+};
+</script>
