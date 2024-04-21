@@ -12,5 +12,5 @@
 
 <script setup>
 // Components
-import { HomeNoteForm, HomeNoteList, HomeSorting } from "./components";
+import { HomeNoteForm, HomeNoteList } from "./components";
 </script>

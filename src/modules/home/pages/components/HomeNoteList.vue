@@ -5,11 +5,9 @@
     <h2 class="text-xl font-bold mb-4">Your Notes</h2>
 
     <div class="flex flex-col gap-4">
-      <!-- Loading -->
       <div class="flex justify-center" v-if="home.homeLoadingNotes">
         <Icon class="text-[28px]" icon="line-md:loading-loop" />
       </div>
-
       <HomeNoteCardList
         v-for="note in home.homeNotes"
         v-else
@@ -18,6 +16,8 @@
         :title="note.title"
         :content="note.content"
       />
+
+      <HomeNoteCardList id="123" title="wwww" content="wwww" />
     </div>
   </div>
 </template>
@@ -48,7 +48,7 @@ const onChangeSorting = (value) => {
 
 // Lifecycle
 const fetchNotes = () => {
-  store.dispatch("homeFetchNotes", filter);
+  // store.dispatch("homeFetchNotes", filter);
 };
 
 watch(

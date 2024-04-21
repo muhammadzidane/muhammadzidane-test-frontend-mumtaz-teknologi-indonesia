@@ -1,4 +1,4 @@
-import { http } from "@/plugins/axios/index";
+import { http } from "@/plugins/axios";
 
 const homeStore = {
   state: () => ({
@@ -12,6 +12,9 @@ const homeStore = {
 
     // Create
     homeLoadingCreateNote: false,
+
+    // Delete
+    homeLoadingDeleteNote: false,
   }),
   mutations: {
     // Notes
@@ -33,6 +36,11 @@ const homeStore = {
     // Note Create
     homeSetLoadingCreateNote(state, homeNotes) {
       state.homeLoadingCreateNote = homeNotes;
+    },
+
+    // Note Delete
+    homeSetLoadingDeleteNote(state, homeNotes) {
+      state.homeLoadingDeleteNote = homeNotes;
     },
   },
   actions: {
@@ -78,8 +86,6 @@ const homeStore = {
       try {
         commit("homeSetLoadingCreateNote", true);
 
-        console.log(params);
-
         const response = await http.post("/notes", params);
         const data = response.data.data;
 
@@ -88,6 +94,21 @@ const homeStore = {
         return Promise.resolve(error);
       } finally {
         commit("homeSetLoadingCreateNote", false);
+      }
+    },
+
+    async homeDeleteNote({ commit }, id) {
+      try {
+        commit("homeSetLoadingDeleteNote", true);
+
+        const response = await http.delete(`/notes/${id}`);
+        const data = response.data.data;
+
+        return Promise.resolve(data);
+      } catch (error) {
+        return Promise.resolve(error);
+      } finally {
+        commit("homeSetLoadingDeleteNote", false);
       }
     },
   },
