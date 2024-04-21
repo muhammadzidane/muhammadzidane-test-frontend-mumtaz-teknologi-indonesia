@@ -1,18 +1,7 @@
 <template>
-  <button :class="computedClasses" @click="onClick">
-    <img
-      v-if="iconPosition === 'left'"
-      :src="src"
-      class="inline mr-3"
-      alt="icon"
-    />
+  <button v-bind="$attrs" :class="computedClasses" @click="onClick">
+    <Icon v-if="loading" class="text-[18px] mr-2" icon="line-md:loading-loop" />
     <slot></slot>
-    <img
-      v-if="iconPosition === 'right'"
-      :src="src"
-      class="inline ml-3"
-      alt="icon"
-    />
   </button>
 </template>
 
@@ -38,14 +27,9 @@ const props = defineProps({
     validator: (value) => ["small", "medium", "large"].includes(value),
     default: "medium",
   },
-  icon: {
-    type: String,
-    default: null,
-  },
-  iconPosition: {
-    type: String,
-    validator: (value) => ["left", "right"].includes(value),
-    default: "left",
+  loading: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -54,21 +38,29 @@ const computedClasses = computed(() => {
   return [
     "flex",
     "justify-between",
+    "items-center",
     "rounded",
     "text-white",
     "font-semibold",
+    // Size
     {
       "px-2 py-0 text-[12px]": props.size === "small",
       "px-4 py-2": props.size === "medium",
       "px-6 py-3": props.size === "large",
     },
+    // Variant
     {
       "bg-primary": props.variant === "primary",
       "bg-gray-4": props.variant === "gray-4",
     },
+    // Type
     {
       [`border-2 border-${props.variant} !bg-transparent !text-black`]:
         props.type === "outline",
+    },
+    // Loading
+    {
+      "opacity-80": props.loading,
     },
   ];
 });

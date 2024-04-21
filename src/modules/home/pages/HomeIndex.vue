@@ -9,7 +9,7 @@
     <HomeSorting />
 
     <!-- List of existing notes -->
-    <HomeNoteList />
+    <!-- <HomeNoteList /> -->
   </div>
 </template>
 

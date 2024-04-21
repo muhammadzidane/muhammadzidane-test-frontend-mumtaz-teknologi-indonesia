@@ -24,12 +24,9 @@
       </AppBaseFormGroup>
     </div>
     <div class="flex items-center justify-between">
-      <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        type="submit"
-      >
+      <AppBaseButton type="submit" :loading="home.homeLoadingCreateNote">
         Add Note
-      </button>
+      </AppBaseButton>
     </div>
   </form>
 </template>
@@ -38,10 +35,16 @@
 // Vue
 import { computed, ref } from "vue";
 
+// Vuex
+import { useStore } from "vuex";
+
 // Vuelidate
 import { required, minLength } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import AppBaseInput from "@/modules/app/components/base/AppBaseInput.vue";
+
+// Hooks
+const store = useStore();
 
 // Ref
 const formData = ref({
@@ -50,19 +53,29 @@ const formData = ref({
 });
 
 // Computed
+const home = computed(() => store.state.home);
+
 const rules = computed(() => ({
   title: { required },
   content: { required, minLength: minLength(6) },
 }));
-
 const v$ = useVuelidate(rules, formData, { $autoDirty: true });
 
 // Methods
+const createNote = async () => {
+  await store.dispatch("homeCreateNote", formData.value);
+};
+
+const fetchNotes = () => {
+  store.dispatch("homeFetchNotes", {});
+};
+
 const submitForm = async () => {
   const validate = await v$.value.$validate();
 
   if (validate) {
-    console.log(true);
+    await createNote();
+    // fetchNotes();
   }
 };
 </script>

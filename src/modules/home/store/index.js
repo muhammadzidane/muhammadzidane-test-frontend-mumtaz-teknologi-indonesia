@@ -9,6 +9,9 @@ const homeStore = {
     // Note Detail
     homeLoadingDetailNote: false,
     homeLoadingDetail: {},
+
+    // Create
+    homeLoadingCreateNote: false,
   }),
   mutations: {
     // Notes
@@ -26,17 +29,27 @@ const homeStore = {
     homeSetDetailNote(state, homeNotes) {
       state.homeLoadingDetail = homeNotes;
     },
+
+    // Note Create
+    homeSetLoadingCreateNote(state, homeNotes) {
+      state.homeLoadingCreateNote = homeNotes;
+    },
   },
   actions: {
     async homeFetchNotes({ commit }, params = {}) {
       try {
         commit("homeSetLoadingNotes", true);
+
         const response = await http.get("/notes", {
           params,
         });
-        commit("homeSetNotes", response.data.data);
+        const data = response.data.data;
+
+        commit("homeSetNotes", data);
+
+        return Promise.resolve(data);
       } catch (error) {
-        //
+        return Promise.reject(error);
       } finally {
         commit("homeSetLoadingNotes", false);
       }
@@ -45,14 +58,36 @@ const homeStore = {
     async homeFetchDetailNote({ commit }, id, params = {}) {
       try {
         commit("homeSetLoadingDetailNote", true);
+
         const response = await http.get(`/notes/${id}`, {
           params,
         });
-        commit("homeSetDetailNote", response.data.data);
+        const data = response.data.data;
+
+        commit("homeSetDetailNote", data);
+
+        return Promise.resolve(data);
       } catch (error) {
-        //
+        return Promise.reject(error);
       } finally {
         commit("homeSetLoadingDetailNote", false);
+      }
+    },
+
+    async homeCreateNote({ commit }, params = {}) {
+      try {
+        commit("homeSetLoadingCreateNote", true);
+
+        console.log(params);
+
+        const response = await http.post("/notes", params);
+        const data = response.data.data;
+
+        return Promise.resolve(data);
+      } catch (error) {
+        return Promise.resolve(error);
+      } finally {
+        commit("homeSetLoadingCreateNote", false);
       }
     },
   },
